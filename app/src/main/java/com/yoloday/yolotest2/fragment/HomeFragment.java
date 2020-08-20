@@ -57,7 +57,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
-    private MapView mapView = null;
+    private MapView mapView;
     private RecyclerView recyclerView;
    
 
@@ -82,11 +82,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView title = rootView.findViewById(R.id.title);
-        final TextView category = rootView.findViewById(R.id.category);
-        final TextView location_name = rootView.findViewById(R.id.location_name);
-        final ImageView profileImageView = rootView.findViewById(R.id.profileImageView);
-
 
         NestedScrollView bottomSheet = (NestedScrollView) rootView.findViewById(R.id.bottom_sheet);
         //BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
@@ -103,7 +98,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         arrayList = new ArrayList<>();
 
-        loaddate();
+        datafromfirebase();
 
         adapter = new ListAdapter(arrayList, getContext());
         recyclerView.setAdapter(adapter);
@@ -113,8 +108,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
 
 
-
-    private void loaddate(){
+    //데이터를 가져옵니
+    private void datafromfirebase(){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

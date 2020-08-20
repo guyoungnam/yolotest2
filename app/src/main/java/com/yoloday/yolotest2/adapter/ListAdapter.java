@@ -47,8 +47,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
         holder.title.setText(arrayList.get(position).getTitle());
         holder.category.setText(arrayList.get(position).getCategory());
+        holder.location_name.setText(arrayList.get(position).getLocation_name());
        // Picasso.get().load(photoUrl.get(position).getPhotoUrl()).into(holder.photoUrl);
 
+        Log.d("title","title");
 
     }
 
@@ -60,12 +62,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title,category;
+        TextView title,category,location_name;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
             category = (TextView) itemView.findViewById(R.id.category);
+            location_name = (TextView) itemView.findViewById(R.id.location_name);
 
         }
     }
