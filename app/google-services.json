@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "836209055047-3klvdo0860b5i3vg98if5uqgmb4ribd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoloday.yolotest2",
+            "certificate_hash": "bc0dc29c64911bd29d1adfa851fb415e6ee1a083"
+          }
+        },
+        {
           "client_id": "836209055047-nolcvk2485ep7sp7djk5t00ajuk4nei5.apps.googleusercontent.com",
           "client_type": 3
         }

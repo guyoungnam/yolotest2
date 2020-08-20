@@ -12,6 +12,8 @@ public class ListInfo {
     private String longitude;
     private String photoUrl;
 
+    private ListInfo(){}
+
 
     public ListInfo(String title, String category, String address, String location_name, String latitude, String longitude, String photoUrl) {
         this.title = title;
@@ -21,6 +23,11 @@ public class ListInfo {
         this.latitude = latitude;
         this.longitude = longitude;
         this.photoUrl = photoUrl;
+
+
+        
+
+        
     }
 
     public String getTitle() {

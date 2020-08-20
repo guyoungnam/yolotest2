@@ -7,64 +7,73 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.yoloday.yolotest2.ListInfo;
 import com.yoloday.yolotest2.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
     private Context context;
-    private List<ListInfo> list = new ArrayList<>();
-
-    public ListAdapter(Context context, List<ListInfo> list){
-        this.context = context;
-        this.list = list;
-    }
+    private ArrayList<ListInfo> arrayList;
 
 
-    // ViewHolder 생성
-    // row layout을 화면에 뿌려주고 holder에 연결
 
+
+    @NonNull
     @Override
-    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        Holder holder = new Holder(view);
+        
+        return new MyViewHolder(view);
+    }
 
-        return holder;
+    public ListAdapter(ArrayList<ListInfo> arrayList, Context context){
+        this.arrayList = arrayList;
+        this.context = context;
+
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
-        // 각 위치에 문자열 세팅
-        int itemposition = position;
+    public void onBindViewHolder(@NonNull ListAdapter.MyViewHolder holder, int position) {
 
-        holder.title.setText(list.get(itemposition).getTitle());
-        holder.category.setText(list.get(itemposition).getCategory());
+        holder.title.setText(arrayList.get(position).getTitle());
+        holder.category.setText(arrayList.get(position).getCategory());
+       // Picasso.get().load(photoUrl.get(position).getPhotoUrl()).into(holder.photoUrl);
 
-        Log.e("StudyApp", "onBindViewHolder" + itemposition);
+
     }
-
-
 
     @Override
     public int getItemCount() {
-        return list.size(); // RecyclerView의 size return
+        return (arrayList!=null? arrayList.size():0);
     }
 
-    // ViewHolder는 하나의 View를 보존하는 역할을 한다
-    public class Holder extends RecyclerView.ViewHolder{
-        public TextView title;
-        public TextView category;
 
-        public Holder(View view){
-            super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            category = (TextView) view.findViewById(R.id.category);
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView title,category;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.title);
+            category = (TextView) itemView.findViewById(R.id.category);
+
         }
     }
 }
+
+
+
+
+
+
 
