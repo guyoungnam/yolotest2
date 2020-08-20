@@ -1,6 +1,8 @@
 package com.yoloday.yolotest2.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.yoloday.yolotest2.ListInfo;
 import com.yoloday.yolotest2.R;
+import com.yoloday.yolotest2.activity.EventDetailActivity;
+import com.yoloday.yolotest2.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     private Context context;
     private ArrayList<ListInfo> arrayList;
+    private Activity activity;
 
 
 
@@ -70,6 +75,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             category = (TextView) itemView.findViewById(R.id.category);
             location_name = (TextView) itemView.findViewById(R.id.location_name);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(activity, EventDetailActivity.class);
+                    activity.startActivity(intent);
+
+
+                }
+            });
         }
     }
 }

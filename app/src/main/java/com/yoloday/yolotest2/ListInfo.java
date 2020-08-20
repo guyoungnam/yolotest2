@@ -8,14 +8,14 @@ public class ListInfo {
     private String category;
     private String address;
     private String location_name;
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
     private String photoUrl;
 
     private ListInfo(){}
 
 
-    public ListInfo(String title, String category, String address, String location_name, String latitude, String longitude, String photoUrl) {
+    public ListInfo(String title, String category, String address, String location_name, double latitude, double longitude, String photoUrl) {
         this.title = title;
         this.category = category;
         this.address = address;
@@ -62,19 +62,20 @@ public class ListInfo {
         this.location_name = location_name;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -95,7 +96,7 @@ public class ListInfo {
         ArrayList<ListInfo> contacts = new ArrayList<ListInfo>();
 
         for (int i = 1; i <= numContacts; i++) {
-            contacts.add(new ListInfo("맥도날", "콘서트","서울 서대문구 연세로 50","금호아트홀 연세","37.56","126.7",""));
+            contacts.add(new ListInfo("맥도날", "콘서트","서울 서대문구 연세로 50","금호아트홀 연세",37.56,126.7,""));
         }
 
         return contacts;

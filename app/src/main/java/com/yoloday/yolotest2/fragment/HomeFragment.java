@@ -22,16 +22,19 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +58,7 @@ import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private MapView mapView;
     private RecyclerView recyclerView;
@@ -65,6 +68,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private ListAdapter adapter;
 
     private RecyclerView.LayoutManager layoutManager;
+
+    private ChildEventListener childEventListener;
 
 
     public HomeFragment(){
@@ -181,24 +186,84 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
 
         //파이어베이스에서 가져온 위도/경도를 가져옵니다
 
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+        googleMap.setOnMarkerClickListener(this);
+
+        LatLng latLng = new LatLng(37.56,126.97);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+        googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+        addMarkersToMap(googleMap);
+
+
+
+    /*    LatLng SEOUL = new LatLng(37.56, 126.97);
 
         MarkerOptions markerOptions = new MarkerOptions();
 
         markerOptions.position(SEOUL);
-
         markerOptions.title("서울");
-
         markerOptions.snippet("수도");
 
         googleMap.addMarker(markerOptions);
-
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));*/
 
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+
+
+    }
+
+
+
+
+    private void addMarkersToMap(final GoogleMap googleMap) {
+
+        DatabaseReference positionRef = FirebaseDatabase.getInstance().getReference("event");
+       // final ListInfo listInfo = new ListInfo("","","","",0,0,"");
+       // positionRef.push().setValue(listInfo);
+
+        childEventListener = positionRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                ListInfo listInfo1 = snapshot.getValue(ListInfo.class);
+                double latitude = listInfo1.getLatitude();
+                double longitude = listInfo1.getLongitude();
+                String location_name = listInfo1.getLocation_name();
+                LatLng location = new LatLng(latitude,longitude);
+
+                googleMap.addMarker(new MarkerOptions().position(location).title(location_name));
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }
