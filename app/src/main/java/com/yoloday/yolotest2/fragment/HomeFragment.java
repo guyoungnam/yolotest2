@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
         datafromfirebase();
 
-        adapter = new ListAdapter(arrayList, getContext());
+        adapter = new ListAdapter(arrayList, getContext(),getActivity());
         recyclerView.setAdapter(adapter);
 
         return rootView;
@@ -197,7 +197,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         addMarkersToMap(googleMap);
-
 
 
     /*    LatLng SEOUL = new LatLng(37.56, 126.97);

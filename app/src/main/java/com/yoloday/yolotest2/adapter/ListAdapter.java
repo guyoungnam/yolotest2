@@ -31,8 +31,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private Activity activity;
 
 
-
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,9 +39,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         return new MyViewHolder(view);
     }
 
-    public ListAdapter(ArrayList<ListInfo> arrayList, Context context){
+    public ListAdapter(ArrayList<ListInfo> arrayList, Context context,Activity activity){
         this.arrayList = arrayList;
         this.context = context;
+        this.activity = activity;
 
     }
 
@@ -76,11 +75,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             location_name = (TextView) itemView.findViewById(R.id.location_name);
 
             itemView.setOnClickListener(new View.OnClickListener() {
+
+                
                 @Override
                 public void onClick(View view) {
 
                     Intent intent = new Intent(activity, EventDetailActivity.class);
                     activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_in_right);
 
 
                 }

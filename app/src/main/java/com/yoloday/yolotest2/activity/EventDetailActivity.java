@@ -13,10 +13,8 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventdetail);
 
-
-
+        /*finish();
+        overridePendingTransition(R.anim.fui_slide_out_left,R.anim.fui_slide_out_left);*/
     }
-
-
 
 }
