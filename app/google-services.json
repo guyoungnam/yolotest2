@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1096857470737",
+    "firebase_url": "https://campers--ground.firebaseio.com",
+    "project_id": "campers--ground",
+    "storage_bucket": "campers--ground.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096857470737:android:3a76b1b9ecc14c09b46eb0",
+        "android_client_info": {
+          "package_name": "com.campers.ground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096857470737-qcsmjspic8kqfcebufq4e7d57qkck7am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIXTUK2k5rFC0KUwKQUL6YPwMK8C7RRvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096857470737-qcsmjspic8kqfcebufq4e7d57qkck7am.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
