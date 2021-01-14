@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yoloday.yolotest2">
+    package="com.campers.ground">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -8,6 +8,8 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -31,9 +33,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAbD6ovPQ4hFxoRb_kdwQHg7us7dE0gkMQ" />
+            android:value="AIzaSyAlnhuzkmpTwWVULcUP_Wv1h5rfI6_oWdY" />
 
         <activity android:name=".activity.EventDetailActivity"></activity>
+        <activity android:name=".activity.FilterActivity"></activity>
         <activity
             android:name=".activity.MainActivity"
             
