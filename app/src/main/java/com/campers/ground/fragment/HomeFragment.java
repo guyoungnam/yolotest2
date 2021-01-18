@@ -68,8 +68,9 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback,
+public class HomeFragment extends Fragment implements OnMapReadyCallback, AAH_FabulousFragment.Callbacks,
         GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, SlidingPaneLayout.PanelSlideListener, AAH_FabulousFragment.AnimationListener {
 
     private static final String TAG = "HomeFragment";
@@ -119,14 +120,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
 
     private SharedViewModel sharedViewModel;
-    private ArrayMap<String, List<String>> applied_filters = new ArrayMap<>();
+    private ArrayMap<String, List<String>> applied_filters = new ArrayMap<>(
 
-    CampersData listInfo;
+    );
+
+    private CampersData cData;
 
 
     public HomeFragment(){
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -187,6 +191,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         adapter = new HomeAdapter(arrayList, getContext(),getActivity());
         recyclerView.setAdapter(adapter);
 
+
+
         return rootView;
     }
 
@@ -213,7 +219,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                     }
                     adapter.notifyDataSetChanged();
 
-                    Log.d(TAG, "adapter : call"+adapter);
+                    Log.d(TAG, "adapter : call" +adapter);
+                    Log.d(TAG, "arrayList : call" +arrayList);
+
                 }
             }
 
@@ -224,6 +232,38 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
             }
         });
+
+    }
+
+    @Override
+    public void onResult(Object result) {
+
+        Log.d("k9res", "onResult: " + result.toString());
+
+        if(result.toString().equals("swiped_down")){
+
+        }else {
+            if(result !=null){
+                ArrayMap<String, List<String>> applied_filters = (ArrayMap<String, List<String>>) result;
+                if(applied_filters.size() !=0){
+                    //List<ListInfo> filterdList = cData.getAllCampers();
+
+                    for(Map.Entry<String, List<String>> entry : applied_filters.entrySet()){
+                        Log.d("k9res", "entry.key: " + entry.getKey());
+                        switch (entry.getKey()){
+                            case "price":
+                              //  filterdList = cData.getPriceFilteredCampers(entry.getValue(), filterdList);
+                                break;
+                            case "category":
+                              //  filterdList = cData.getCategoryFilteredCampers(entry.getValue(), filterdList);
+                                break;
+                        }
+                    }
+                 //   Log.d("k9res","new size:"+ filterdList.size());
+
+                }
+            }
+        }
 
     }
 
@@ -238,6 +278,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
     public ArrayMap<String, List<String>> getApplied_filters() {
         return applied_filters;
+    }
+
+    public CampersData getcData(){
+        return cData;
     }
 
 
@@ -563,4 +607,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     public void onCloseAnimationEnd() {
 
     }
+
+
 }

@@ -126,7 +126,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                     int position = getAdapterPosition();
                     mListener.onItemSelected(view,getAdapterPosition());
 
-                    Log.d("test","position="+getAdapterPosition());
+                    Log.d("TAG","position="+getAdapterPosition());
 
                     }
 

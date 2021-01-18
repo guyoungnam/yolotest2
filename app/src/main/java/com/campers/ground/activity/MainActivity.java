@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.campers.ground.CampersData;
 import com.campers.ground.R;
 import com.campers.ground.SharedViewModel;
 import com.campers.ground.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public CampersData getcData;
     HomeFragment homeFragment;
     private SharedViewModel viewModel;
 
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+
+
+
 
 
 

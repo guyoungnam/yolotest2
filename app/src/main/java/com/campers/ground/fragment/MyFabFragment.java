@@ -1,6 +1,8 @@
 package com.campers.ground.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -23,8 +25,11 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
+import com.campers.ground.CampersData;
+import com.campers.ground.ListInfo;
 import com.campers.ground.R;
 import com.campers.ground.SharedViewModel;
+import com.campers.ground.activity.MainActivity;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.tabs.TabLayout;
 
@@ -42,6 +47,8 @@ public class MyFabFragment extends AAH_FabulousFragment {
     ImageButton imgbtn_refresh, imgbtn_apply;
     SectionsPagerAdapter mAdapter;
     private DisplayMetrics metrics;
+
+    CampersData cData;
 
     private SharedViewModel sharedViewModel;
 
@@ -82,7 +89,6 @@ public class MyFabFragment extends AAH_FabulousFragment {
     }
 
     @Override
-
     public void setupDialog(Dialog dialog, int style) {
         View contentView = View.inflate(getContext(), R.layout.filter_view, null);
 
@@ -133,6 +139,19 @@ public class MyFabFragment extends AAH_FabulousFragment {
 
     public class SectionsPagerAdapter extends PagerAdapter {
 
+        private Context context;
+        private ArrayList<ListInfo> arrayList;
+        private Activity activity;
+
+
+        public SectionsPagerAdapter() {
+            this.arrayList = arrayList;
+            this.context = context;
+            this.activity = activity;
+
+        }
+
+
         @Override
         public Object instantiateItem(ViewGroup collection, int position) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -143,7 +162,7 @@ public class MyFabFragment extends AAH_FabulousFragment {
 //            ll_scroll.setLayoutParams(lp);
             switch (position) {
                 case 0:
-                    inflateLayoutWithFilters("genre", fbl);
+                    inflateLayoutWithFilters("price", fbl);
                     break;
                 case 1:
                     inflateLayoutWithFilters("rating", fbl);
@@ -177,10 +196,10 @@ public class MyFabFragment extends AAH_FabulousFragment {
                     return "PRICE";
                 case 1:
                     return "CATEGORY";
-                case 2:
-                    return "YEAR";
-                case 3:
-                    return "QUALITY";
+//                case 2:
+//                    return "YEAR";
+//                case 3:
+//                    return "QUALITY";
 
             }
             return "";
@@ -195,12 +214,13 @@ public class MyFabFragment extends AAH_FabulousFragment {
 
     public void inflateLayoutWithFilters(final String filter_category, FlexboxLayout fbl) {
         List<String> keys = new ArrayList<>();
+
         switch (filter_category) {
             case "price":
-                //  keys = ((SharedViewModel) getActivity()).getListInfo().getUniquePriceKeys();
+           //     keys =  CampersData.getUniquePriceKeys();
                 break;
-            case "rating":
-             //   keys = ((MainActivity) getActivity()).getmData().getUniqueRatingKeys();
+            case "category":
+            //    keys = ((MainActivity) getActivity()).getcData.getUniqueCategoryKeys();
                 break;
             case "year":
              //   keys = ((MainActivity) getActivity()).getmData().getUniqueYearKeys();
